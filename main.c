@@ -6,6 +6,9 @@
 #include <sys/socket.h>
 #include <sys/un.h>
 
+#define A
+#define SOCK_PUT "echo_socket"
+
 int main() {
 	printf("Hello\n");
 }
