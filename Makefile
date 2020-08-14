@@ -1,6 +1,8 @@
 all:
-	mkdir build
 	gcc *.c -o build/init
 
+run: all
+	./build/init
+
 clean:
-	rm -rvf build
+	rm -rvf build/*
