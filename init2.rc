@@ -1,0 +1,12 @@
+./test.sh 2 3
+
+echo test
+
+/etc/runit/runsvdir/default/agetty-console/run
+/etc/runit/runsvdir/default/agetty-generic/run
+/etc/runit/runsvdir/default/agetty-tty1/run
+/etc/runit/runsvdir/default/dbus/run
+/etc/runit/runsvdir/default/udev/run
+/etc/runit/runsvdir/default/elogind/run
+/etc/runit/runsvdir/default/sulogin/run
+/bin/bash

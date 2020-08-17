@@ -56,12 +56,14 @@ void *server(void *arg){
 
 	while(radi) {
 		if ((s2 = accept(s, (struct sockaddr *)&remote, &t)) == -1) {
-            perror("accept");
-            exit(1);
-        }
+			perror("accept");
+			exit(1);
+		}
 
 		while(len = recv(s2, &buf, 100, 0), len > 0)
 			send(s2, &buf, len, 0), close(s2);
+		if(len==0)
+			sleep(3);
 	}
 
 	kraj = 1;
@@ -94,10 +96,14 @@ int main(int argc, char **argv, char **envp) {
 	pthread_t server_tred;
 	int iret = 0;
 
+	fclose(stdin);
+	fclose(stderr);
+
 	iret = pthread_create(&server_tred, NULL, server, prg);
 
 
 	while(!kraj) {
+		sleep(3);
 		if((pid = fork()) == 0)
 			execve(argv[1], argv + 1, envp), exit(1);
 		waitpid(pid, NULL, 0);

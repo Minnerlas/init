@@ -1,6 +1,6 @@
 #!/bin/sh
 
-MAKE_FLAGS=""
+MAKE_FLAGS="CC=gcc"
 
 [ ! -d "./build" ] && mkdir build
 [ ! -d "./run" ] && mkdir run

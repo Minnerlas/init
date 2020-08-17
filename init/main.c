@@ -28,6 +28,11 @@ void oslobodi_argv(char **argv){
 	free(argv);
 }
 
+char *env[] = {
+	"PATH=/usr/bin:usr/sbin:/bin:/sbin",
+	NULL
+};
+
 char **obrada_argv(char *ul, int duz) {
 	char **argv = malloc(sizeof(*argv) * (POCDUZ + 1));
 	int i, fd;
@@ -99,12 +104,32 @@ int pokreni(char **argv, char **envp) {
 }
 
 int main(int argc, char **argv, char **envp) {
+
+	fclose(stdin);
+	fclose(stderr);
+
 	uid_t euid;
 
 	euid = geteuid();
 
 	//if(euid != 0)
 	//	printf("%s can only be run as root\n", *argv), exit(1);
+
+	int duz1, duz2, ukduz, i;
+	for(duz1 = 0; envp[duz1]; duz1++);
+	for(duz2 = 0; env[duz2]; duz2++);
+	ukduz = duz1+duz2;
+
+
+	char **t = malloc(sizeof(*t) * (ukduz + 1));
+
+	for(i = 0; i<duz1; i++)
+		t[i] = envp[i];
+
+	for(i = 0; i<duz2; i++)
+		t[duz1+i] = env[i];
+
+	t[ukduz] = NULL;
 	
 
 	FILE *init_rc;
@@ -119,13 +144,13 @@ int main(int argc, char **argv, char **envp) {
 		char **child_argv = obrada_argv(ulcmd, DUZ);
 
 		printf("%s \n", child_argv[0]);
-		pokreni(child_argv, envp);
+		pokreni(child_argv, t);
 		//execve(child_argv[0], child_argv, NULL);
 
 	}
 
+	free(t);
 	fclose(init_rc);
-
 	for(;;);
 
 }
