@@ -79,7 +79,7 @@ char **obrada_argv(char *ul, int duz) {
 	return NULL;
 }
 
-int pokreni(char **argv) {
+int pokreni(char **argv, char **envp) {
 	size_t duz = 0;
 	int i;
 	pid_t pid;
@@ -94,11 +94,11 @@ int pokreni(char **argv) {
 	free(argv);
 	argv = t;
 	if(!(pid = fork()))
-		execve(argv[0], argv, NULL);
+		execve(argv[0], argv, envp);
 	oslobodi_argv(argv);
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv, char **envp) {
 	uid_t euid;
 
 	euid = geteuid();
@@ -119,7 +119,7 @@ int main(int argc, char **argv) {
 		char **child_argv = obrada_argv(ulcmd, DUZ);
 
 		printf("%s \n", child_argv[0]);
-		pokreni(child_argv);
+		pokreni(child_argv, envp);
 		//execve(child_argv[0], child_argv, NULL);
 
 	}

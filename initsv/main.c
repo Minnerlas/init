@@ -70,7 +70,7 @@ void *server(void *arg){
 	return NULL;
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv, char **envp) {
 	if(argc<2)
 		exit(1);
 	signal(SIGINT, sigint_handler);
@@ -99,7 +99,7 @@ int main(int argc, char **argv) {
 
 	while(!kraj) {
 		if((pid = fork()) == 0)
-			execve(argv[1], argv + 1, NULL), exit(1);
+			execve(argv[1], argv + 1, envp), exit(1);
 		waitpid(pid, NULL, 0);
 	}
 	free(prg);

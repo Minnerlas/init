@@ -6,6 +6,9 @@ do
 	echo $i
 done
 
+echo $PWD
+echo $USER
+echo $SHELL
 # vim
 
 while true
