@@ -1,15 +1,17 @@
-CC = cproc
+CC = tcc
 CFLAGS = -I../include
+GCCFLAGS =  -pthread
+CCFLAGS =  -lpthread
 IZLAZ = initsv
 
 all:
-	${CC} ${CFLAGS} *.c -o ../build/${IZLAZ}
-
+	${CC} ${CFLAGS} ${CCFLAGS} *.c -o ../build/${IZLAZ}
+ 
 run: all
 	../build/${BUILD}
 
 dbg:
-	gcc -g ${CFLAGS}  *.c -o ../build/${IZLAZ}
+	gcc -g ${CFLAGS} ${GCCFLAGS} *.c -o ../build/${IZLAZ}
 
 clean:
 	rm -rvf ../build/*

@@ -18,7 +18,7 @@
 #define DUZ 100
 #define POCDUZ 8
 
-char delm[] = " \n\t";
+const char delm[] = " \n\t";
 char ulcmd[DUZ];
 
 void oslobodi_argv(char **argv){
