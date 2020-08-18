@@ -30,8 +30,6 @@ void *server(void *arg){
 	struct sockaddr_un local, remote;
 	int len, radi = 1, t;
 	char buf[100], *prg = arg;
-	int asd = 1;
-	while(asd);
 
 	if((s = socket(AF_UNIX, SOCK_STREAM, 0)) == -1) {
 		perror("socket"); //TODO
@@ -63,8 +61,7 @@ void *server(void *arg){
 		while(len = recv(s2, &buf, 100, 0), len > 0)
 			send(s2, &buf, len, 0), close(s2);
 
-		if(len==0)
-			sleep(3);
+		sleep(3);
 	}
 
 	kraj = 1;
@@ -98,8 +95,6 @@ int main(int argc, char **argv, char **envp) {
 	int iret = 0;
 	int wstatus = 0;
 
-	//fclose(stdin);
-	//fclose(stderr);
 
 	//iret = pthread_create(&server_tred, NULL, server, prg);
 

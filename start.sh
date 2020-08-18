@@ -25,3 +25,5 @@
 /usr/lib/rc/sv.d/sysctl		start
 /usr/lib/rc/sv.d/binfmt		start
 /usr/lib/rc/sv.d/cleanup	start
+
+sleep 5

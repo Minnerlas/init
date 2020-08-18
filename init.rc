@@ -1,1 +1,12 @@
-/bin/bash
+#/bin/bash
+
+/etc/runit/sv/elogind/run
+/etc/runit/sv/dbus/run
+/etc/runit/sv/udevd/run
+/etc/runit/sv/sulogin/run
+/etc/runit/sv/connmand/run
+/init/test/agetty-tty1/run
+/init/test/agetty-tty2/run
+/init/test/agetty-tty3/run
+/init/test/agetty-generic/run
+/init/test/agetty-console/run

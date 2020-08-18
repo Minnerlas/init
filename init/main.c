@@ -134,14 +134,16 @@ int main(int argc, char **argv, char **envp) {
 
 	init_rc = fopen(SERVISI, "r");
 
-	if(!fork())
+	pid_t pid;
+
+	if(!(pid = fork()))
 		execve(PREFIKS "/start.sh", NULL, envp);
 
-	wait(NULL);
+	waitpid(pid, NULL, 0);
 
 	while(fgets(ulcmd, DUZ, init_rc)) {
 
-		if(*ulcmd == '\n')
+		if(*ulcmd == '\n' || *ulcmd == '#')
 			continue;
 
 		char **child_argv = obrada_argv(ulcmd, DUZ);
@@ -149,12 +151,12 @@ int main(int argc, char **argv, char **envp) {
 		printf("%s \n", child_argv[0]);
 		pokreni(child_argv, t);
 		//execve(child_argv[0], child_argv, NULL);
-	printf("TEST");
+		printf("TEST");
 
 	}
 
 	free(t);
 	fclose(init_rc);
 	for(;;)
-		sleep(3);
+		sleep(10000);
 }
