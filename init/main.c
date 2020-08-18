@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <sys/wait.h>
 #include <sys/un.h>
 
 #include "init.h"
@@ -29,7 +30,7 @@ void oslobodi_argv(char **argv){
 }
 
 char *env[] = {
-	"PATH=/usr/bin:usr/sbin:/bin:/sbin",
+	"PATH=/init/build:/usr/bin:usr/sbin:/bin:/sbin",
 	NULL
 };
 
@@ -133,6 +134,11 @@ int main(int argc, char **argv, char **envp) {
 
 	init_rc = fopen(SERVISI, "r");
 
+	if(!fork())
+		execve(PREFIKS "/start.sh", NULL, envp);
+
+	wait(NULL);
+
 	while(fgets(ulcmd, DUZ, init_rc)) {
 
 		if(*ulcmd == '\n')
@@ -143,11 +149,12 @@ int main(int argc, char **argv, char **envp) {
 		printf("%s \n", child_argv[0]);
 		pokreni(child_argv, t);
 		//execve(child_argv[0], child_argv, NULL);
+	printf("TEST");
 
 	}
 
 	free(t);
 	fclose(init_rc);
-	for(;;);
-
+	for(;;)
+		sleep(3);
 }

@@ -108,7 +108,7 @@ int main(int argc, char **argv, char **envp) {
 		if((pid = fork()) == 0)
 			execve(argv[1], argv + 1, envp), exit(1);
 		sleep(3);
-		waitpid(pid, &wstatus, 0);
+		while(!waitpid(pid, &wstatus, 0));
 	}
 	free(prg);
 }

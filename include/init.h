@@ -1,9 +1,10 @@
 #ifndef INIT_H
 #define INIT_H
 
-#define INITSV_PUT "/init/build/initsv"
-#define RADNI_FOLDER "/init/run/"
-#define SERVISI "/init/init.rc"
+#define PREFIKS "/init"
+#define INITSV_PUT (PREFIKS "/build/initsv")
+#define RADNI_FOLDER PREFIKS "/run/"
+#define SERVISI (PREFIKS "/init.rc")
 #define SOCK_PUT "echo_socket"
 
 enum komanda {
