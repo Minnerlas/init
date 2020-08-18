@@ -105,9 +105,6 @@ int pokreni(char **argv, char **envp) {
 
 int main(int argc, char **argv, char **envp) {
 
-	fclose(stdin);
-	fclose(stderr);
-
 	uid_t euid;
 
 	euid = geteuid();
