@@ -9,7 +9,7 @@
 
 #include "init.h"
 
-#define DUZ 100
+#define DUZ 200
 
 int main(int argc, char **argv) {
 	if(argc < 3)
@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
 		exit(1);
 	}
 
-	printf("Trying to connect...\n");
+	//printf("Trying to connect...\n");
 
 	remote.sun_family = AF_UNIX;
 	strcpy(remote.sun_path, socket_put);
@@ -37,7 +37,7 @@ int main(int argc, char **argv) {
 		exit(1);
 	}
 
-	printf("Connected.\n");
+	//printf("Connected.\n");
 
 	strncpy(str, argv[1], DUZ);
 
@@ -46,9 +46,9 @@ int main(int argc, char **argv) {
 		exit(1);
 	}
 
-	if ((t=recv(s, str, 100, 0)) > 0) {
+	if ((t=recv(s, str, DUZ, 0)) > 0) {
 		str[t] = '\0';
-		printf("echo> %s", str);
+		printf("status: %s\n", str);
 	} else {
 		if (t < 0) perror("recv");
 		else printf("Server closed connection\n");

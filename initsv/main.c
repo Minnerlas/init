@@ -10,6 +10,16 @@
 
 #include "init.h"
 
+#define DBG
+
+#ifdef DBG
+# define dbgprintf(x) printf x
+#else
+# define dbgprintf(x)
+#endif
+
+#define DUZ 200
+
 int kraj = 0;
 pid_t pid = 0;
 
@@ -29,7 +39,7 @@ void *server(void *arg){
 	unsigned int s, s2;
 	struct sockaddr_un local, remote;
 	int len, radi = 1, t;
-	char buf[100], *prg = arg;
+	char buf[DUZ], *prg = arg;
 
 	if((s = socket(AF_UNIX, SOCK_STREAM, 0)) == -1) {
 		perror("socket"); //TODO
@@ -58,10 +68,24 @@ void *server(void *arg){
 			exit(1);
 		}
 
-		if(len = recv(s2, &buf, 100, 0))
-			printf("buf: %s\n", buf), send(s2, &"TESTTEST", strlen("TESTTEST"), 0), close(s2);
+		if(len = recv(s2, &buf, DUZ, 0)) {
+			dbgprintf(("buf: %s\n", buf));
+			char *t = malloc(sizeof(*t) * DUZ);
+			*t = 0;
 
-		sleep(3);
+			if(!strncmp("stat", buf, 4)) {
+				snprintf(t, DUZ, "pid: %d", pid);
+			} else if(!strncmp("kill", buf, 4)) {
+				kraj = 1;
+				kill(pid, SIGINT);
+			} else
+				strcpy(t, "Ovo je test");
+
+			send(s2, t, strlen(t), 0);
+			close(s2);
+			free(t);
+		}
+
 	}
 
 	kraj = 1;

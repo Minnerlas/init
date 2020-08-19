@@ -11,7 +11,7 @@
 #include "init.h"
 
 #ifdef DBG
-# define dbgprint(x) nprintf x
+# define dbgprintf(x) printf x
 #else
 # define dbgprint(x) do {} while (0)
 #endif
