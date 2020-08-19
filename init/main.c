@@ -93,14 +93,14 @@ int pokreni(char **argv, char **envp) {
 	duz = i;
 	//printf("duz %d\n", duz);
 	char **t = malloc(sizeof(*t)*(duz + 2));
-	t[0] = strdup(INITSV_PUT);
+	t[0] = strdup("initsv");
 	for(i = 0; i < duz + 1; i++)
 		t[i+1] = argv[i];
 
 	free(argv);
 	argv = t;
 	if(!(pid = fork()))
-		execve(argv[0], argv, envp);
+		execve(INITSV_PUT, argv, envp);
 	oslobodi_argv(argv);
 }
 
