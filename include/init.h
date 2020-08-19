@@ -2,7 +2,8 @@
 #define INIT_H
 
 #define PREFIKS "/init"
-#define INITSV_PUT (PREFIKS "/build/initsv")
+#define INITSV "initsv"
+#define INITSV_PUT (PREFIKS "/build/" INITSV)
 #define RADNI_FOLDER PREFIKS "/run/"
 #define SERVISI (PREFIKS "/init.rc")
 #define SOCK_PUT "echo_socket"

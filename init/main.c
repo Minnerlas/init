@@ -93,7 +93,7 @@ int pokreni(char **argv, char **envp) {
 	duz = i;
 	//printf("duz %d\n", duz);
 	char **t = malloc(sizeof(*t)*(duz + 2));
-	t[0] = strdup("initsv");
+	t[0] = strdup(INITSV);
 	for(i = 0; i < duz + 1; i++)
 		t[i+1] = argv[i];
 

@@ -1,6 +1,6 @@
 #/bin/bash
 
-/etc/runit/sv/elogind/run
+#/etc/runit/sv/elogind/run
 /etc/runit/sv/dbus/run
 /etc/runit/sv/udevd/run
 /etc/runit/sv/sulogin/run
