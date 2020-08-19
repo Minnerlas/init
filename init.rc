@@ -1,10 +1,13 @@
 #/bin/bash
 
 #/etc/runit/sv/elogind/run
-/etc/runit/sv/dbus/run
-/etc/runit/sv/udevd/run
-/etc/runit/sv/sulogin/run
-/etc/runit/sv/connmand/run
-/init/svdir/agetty-tty1/run
-/init/svdir/agetty-tty2/run
-/init/svdir/agetty-tty3/run
+dbus
+udevd
+sulogin
+connmand
+agetty-tty1
+agetty-tty2
+agetty-tty3
+agetty-tty4
+agetty-tty5
+agetty-tty6

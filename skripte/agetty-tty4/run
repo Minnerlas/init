@@ -1,6 +1,7 @@
 #!/bin/sh
 
-tty=${PWD##*-}
+tty=tty4
+TERM_NAME=linux
 
 [ -r conf ] && . ./conf
 

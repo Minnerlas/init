@@ -53,13 +53,13 @@ void *server(void *arg){
 	}
 
 	while(radi) {
-		if ((s2 = accept(s, (struct sockaddr *)&remote, &t)) == -1) {
+		if((s2 = accept(s, (struct sockaddr *)&remote, &t)) == -1) {
 			perror("accept");
 			exit(1);
 		}
 
-		while(len = recv(s2, &buf, 100, 0), len > 0)
-			send(s2, &buf, len, 0), close(s2);
+		if(len = recv(s2, &buf, 100, 0))
+			printf("buf: %s\n", buf), send(s2, &"TESTTEST", strlen("TESTTEST"), 0), close(s2);
 
 		sleep(3);
 	}
@@ -73,37 +73,34 @@ void *server(void *arg){
 int main(int argc, char **argv, char **envp) {
 	if(argc<2)
 		exit(1);
+
 	signal(SIGINT, sigint_handler);
 	printf("%s %s\n", argv[0], argv[1]);
-	char *prg, *t = strdup(argv[1]), *t2 = NULL;
-
-	t2 = prg = strtok(t, delim);
-
-	while(prg != NULL)
-		t2 = prg, prg = strtok(NULL, delim);
+	char *prg, *t2 = NULL;
 
 
-	if(prg == NULL && t2 == NULL)
-		prg = argv[1];
-	else
-		prg = strdup(t2);
 
-	//printf("ime: %s|%s\n", argv[1], prg);
-	free(t);
+	prg = malloc(sizeof(*prg) * (strlen(argv[1]) + strlen(SVDIR)+1));
+
+	*prg = 0;
+
+	strcpy(prg, SVDIR);
+	strcat(prg, argv[1]);
 
 	pthread_t server_tred;
 	int iret = 0;
 	int wstatus = 0;
 
 
-	//iret = pthread_create(&server_tred, NULL, server, prg);
+	iret = pthread_create(&server_tred, NULL, server, argv[1]);
 
 
 	while(!kraj) {
 		if((pid = fork()) == 0)
-			execve(argv[1], argv + 1, envp), exit(1);
+			execve(prg, argv + 1, envp), exit(1);
 		sleep(3);
 		while(!waitpid(pid, &wstatus, 0));
 	}
+
 	free(prg);
 }

@@ -2,6 +2,7 @@
 #define INIT_H
 
 #define PREFIKS "/init"
+#define SVDIR (PREFIKS "/svdir/")
 #define INITSV "initsv"
 #define INITSV_PUT (PREFIKS "/build/" INITSV)
 #define RADNI_FOLDER PREFIKS "/run/"
