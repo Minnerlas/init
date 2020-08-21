@@ -41,7 +41,7 @@ int main(int argc, char **argv) {
 
 	strncpy(str, argv[1], DUZ);
 
-	if (send(s, str, strlen(str), 0) == -1) {
+	if (send(s, str, strlen(str)+1, 0) == -1) { 
 		perror("send");
 		exit(1);
 	}
