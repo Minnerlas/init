@@ -83,7 +83,7 @@ void *server(void *arg){
 					snprintf(t, DUZ, "pid: %d", pid);
 				} else if(!strncmp("kill", buf, 4)) {
 					radi = 0;
-					snprintf(t, DUZ, "0");
+					snprintf(t, DUZ, "SIGTERM sent to pid %d", pid);
 				} else
 					strcpy(t, "Ovo je test");
 
