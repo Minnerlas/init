@@ -108,6 +108,7 @@ void *server(void *arg){
 			exit(1);
 
 		signal(SIGINT, sigint_handler);
+		signal(SIGCHLD, SIG_IGN);
 		printf("%s %s\n", argv[0], argv[1]);
 		char *prg, *t2 = NULL;
 

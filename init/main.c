@@ -129,6 +129,7 @@ int main(int argc, char **argv, char **envp) {
 
 	t[ukduz] = NULL;
 	
+	//signal(SIGCHLD, SIG_IGN);
 
 	FILE *init_rc;
 
