@@ -159,5 +159,5 @@ int main(int argc, char **argv, char **envp) {
 	free(t);
 	fclose(init_rc);
 	for(;;)
-		sleep(10000);
+		wait(NULL);
 }
