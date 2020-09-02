@@ -106,9 +106,7 @@ int pokreni(char **argv, char **envp) {
 
 int main(int argc, char **argv, char **envp) {
 
-	uid_t euid;
-
-	euid = geteuid();
+	uid_t euid = geteuid();
 
 	//if(euid != 0)
 	//	printf("%s can only be run as root\n", *argv), exit(1);
